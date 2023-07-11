@@ -33,6 +33,14 @@ public class AddressResource {
     return addressService.createAddress(requestBody);
   }
 
+  // don't return exact response from saveAll();
+  // Store to a list object than return it.
+  @PostMapping("/addresses/bulk")
+  public List<Address> createBulkUser(@RequestBody List<Address> requestBody){
+    List<Address> addresses = addressService.createBulkAddresses(requestBody);
+    return addresses;
+  }
+
   @GetMapping("/addresses/{id}")
   public Address get(@PathVariable String id){
     Address user =  addressService.getById(Long.parseLong(id));

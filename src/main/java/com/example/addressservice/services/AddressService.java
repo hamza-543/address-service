@@ -71,4 +71,8 @@ public class AddressService {
     String[] result = new String[nullNames.size()];
     return nullNames.toArray(result);
   }
+
+  public List<Address> createBulkAddresses(List<Address> addresses) {
+    return addressRepository.saveAll(addresses);
+  }
 }
