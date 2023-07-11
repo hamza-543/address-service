@@ -29,35 +29,35 @@ public class AddressResource {
   }
   
   @PostMapping("/addresses")
-  public Address createUser(@RequestBody Address requestBody){
+  public Address createAddress(@RequestBody Address requestBody){
     return addressService.createAddress(requestBody);
   }
 
   // don't return exact response from saveAll();
   // Store to a list object than return it.
   @PostMapping("/addresses/bulk")
-  public List<Address> createBulkUser(@RequestBody List<Address> requestBody){
+  public List<Address> createBulkAdresses(@RequestBody List<Address> requestBody){
     List<Address> addresses = addressService.createBulkAddresses(requestBody);
     return addresses;
   }
 
   @GetMapping("/addresses/{id}")
   public Address get(@PathVariable String id){
-    Address user =  addressService.getById(Long.parseLong(id));
-    if (user == null)
+    Address address =  addressService.getById(Long.parseLong(id));
+    if (address == null)
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    return user;
+    return address;
   }
 
   @DeleteMapping("/addresses/{id}")
-  public String getUser(@PathVariable long id){
+  public String getAddress(@PathVariable long id){
     addressService.deleteById(id);
     return "Address successfully deleted";
   }
 
   @PatchMapping("/addresses/{id}")
-  public Address update(@PathVariable long id, @RequestBody Address user){
-    return addressService.update(id, user);
+  public Address update(@PathVariable long id, @RequestBody Address address){
+    return addressService.update(id, address);
   }
   
 }
