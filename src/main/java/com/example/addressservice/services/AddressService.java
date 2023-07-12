@@ -2,10 +2,7 @@ package com.example.addressservice.services;
 
 
 import java.beans.PropertyDescriptor;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -27,6 +24,15 @@ public class AddressService {
 
   public List<Address> allAddresses(){
     return addressRepository.findAll();
+  }
+
+  public List<Address> studentAddresses(QueryParamService queryParams){
+    List<Address> addresses = new ArrayList<>();
+    Long student_id = queryParams.getStudent_id();
+    if (student_id != null){
+      addresses = addressRepository.findByStudentId(student_id);
+    }
+    return addresses;
   }
 
   public Address getById(Long id){
