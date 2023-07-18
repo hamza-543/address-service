@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.addressservice.services.QueryParamService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -50,9 +51,13 @@ public class AddressController {
   }
 
   @DeleteMapping("/addresses/{id}")
-  public String getAddress(@PathVariable long id){
-    addressService.deleteById(id);
-    return "Address successfully deleted";
+  public ResponseEntity<String> deleteAddress(@PathVariable long id){
+    boolean isDeleted = addressService.deleteById(id);
+
+    if (isDeleted)
+      return ResponseEntity.status(HttpStatus.OK).body("Record successfully deleted");
+
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No record found");
   }
 
   @PatchMapping("/addresses/{id}")

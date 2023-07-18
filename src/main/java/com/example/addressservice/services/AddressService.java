@@ -44,8 +44,14 @@ public class AddressService {
     return null;
   }
 
-  public void deleteById(Long id){
-    addressRepository.deleteById(id);
+  public boolean deleteById(Long id){
+    // now use a hack to get user id first after that found better way
+    Address address = this.getById(id);
+    if (address != null){
+      addressRepository.deleteById(id);
+      return true;
+    }
+    return false;
   }
 
   public Address update(Long id,Address address){
